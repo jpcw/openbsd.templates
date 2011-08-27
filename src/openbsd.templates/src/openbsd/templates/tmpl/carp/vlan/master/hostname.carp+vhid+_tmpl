@@ -1,5 +1,5 @@
 #if $carp_group
-inet $ip $netmask $broadcast vhid $vhid carpdev $carpdev pass $password group $carp_group description "$desc"
+inet $ip $netmask $broadcast vhid $vhid carpdev vlan$vhid pass $password group $carp_group description "$desc"
 #else
-inet $ip $netmask $broadcast vhid $vhid carpdev $carpdev pass $password description "$desc"
+inet $ip $netmask $broadcast vhid $vhid carpdev vlan$vhid pass $password description "$desc"
 #end if
