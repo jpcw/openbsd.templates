@@ -17,7 +17,7 @@ How to play with me
 
  :: 
     
-    python bootsrap.py -d
+    python bootstrap.py -d
     bin/buildout
 
 Now you have new entries in bin/ ::

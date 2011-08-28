@@ -26,6 +26,7 @@ class OpenbsdCarpIfaceTemplate(MyTemplate):
             vars['advskew'] = self.defaults['advskew']
         if not 'password' in vars.keys():
             vars['password'] = self.defaults['password']
+        vars['desc'] = vars['desc'][:48]
         self.boolify(vars)
         self.compute_net(vars)
 

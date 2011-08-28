@@ -24,7 +24,7 @@ setup(name='openbsd.templates',
       include_package_data=True,
       data_files = [('etc', ['src/templates/etc/defaults.cfg'])],
       zip_safe=False,
-      install_requires=['setuptools', 'PasteScript', 'Cheetah'],
+      install_requires=['setuptools', 'PasteScript', 'Cheetah', 'IPy'],
       entry_points=""" # -*- Entry points: -*-
       [paste.paster_create_template]
       openbsd_carp_iface = openbsd.templates.package:OpenbsdCarpIfaceTemplate
