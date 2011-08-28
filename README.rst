@@ -58,9 +58,9 @@ We can now play with templates ::
 Let we check::
     
     (thd)athena:OPENBSD jpcw$ cat foo/master/hostname.carp1 
-    inet 192.168.1.15 255.255.255.0 192.168.1.255 vhid 1 carpdev em1 #default carp device pass secure description "Lan interface"
+    inet 192.168.1.15 255.255.255.0 192.168.1.255 vhid 1 carpdev em1 pass secure description "Lan interface"
     (thd)athena:OPENBSD jpcw$ cat foo/slave/hostname.carp1 
-    inet 192.168.1.15 255.255.255.0 192.168.1.255 vhid 1 carpdev em1 #default carp device advskew 100 pass secure description "Lan interface"
+    inet 192.168.1.15 255.255.255.0 192.168.1.255 vhid 1 carpdev em1 advskew 100 pass secure description "Lan interface"
 
 
 templates are intercative for a minimum variables, others came from default values in src/openbsd/templates/etc/defaults.cfg
