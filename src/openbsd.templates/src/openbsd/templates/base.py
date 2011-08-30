@@ -50,8 +50,8 @@ class MyTemplate(Template):
 
     def compute_net(self, vars):
         """."""
-        if not '/' in vars['cidr_ip']:
-            print 'Please provided a CIDR IP address'
+        if not '/' in vars['cidr_ip'] or vars['cidr_ip'].count('/') > 1:
+            print '%s is not a CIDR IP address :/' % vars['cidr_ip']
             sys.exit(True)
         else:
             vars['ip'], cidr_netmask = vars['cidr_ip'].split('/')
