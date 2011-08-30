@@ -54,8 +54,8 @@ class MyTemplate(Template):
             print 'Please provided a CIDR IP address'
             sys.exit(True)
         else:
-            vars['ip'] = vars['cidr_ip'].split('/')[0]
-            if not vars['cidr_ip'].endswith('32'):
+            vars['ip'], cidr_netmask = vars['cidr_ip'].split('/')
+            if cidr_netmask != '32':
                 if self.is_a_network_address(vars['cidr_ip']):
                     msg = "Need cofee? you provided "\
                           "a network address : %s" % vars['cidr_ip']
@@ -64,7 +64,15 @@ class MyTemplate(Template):
 
             net = IP(vars['cidr_ip'], make_net=True)
             vars['netmask'] = net.netmask()
-            vars['broadcast'] = net.broadcast()
+            vars['broadcast'] = str(net.broadcast())
+
+            if cidr_netmask != '32':
+                if vars['ip'] == vars['broadcast']:
+                    msg = "Need cofee? you provided "\
+                          "the broadcast address %s of your network %s/%s" \
+                           % (vars['ip'], net.net(), cidr_netmask)
+                    print msg
+                    sys.exit(True)
 
     def pre(self, command, output_dir, vars):
         """."""
