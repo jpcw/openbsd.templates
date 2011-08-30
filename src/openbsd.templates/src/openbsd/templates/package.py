@@ -1,16 +1,16 @@
 #/usr/bin/env/python
 #
 from paste.script.templates import var
-from base import MyTemplate, getdefaults
+from base import BaseIface, getdefaults
 
 
-class OpenbsdCarpIfaceTemplate(MyTemplate):
+class OpenbsdCarpIfaceTemplate(BaseIface):
     """."""
     _template_dir = 'tmpl/carp/iface'
     defaults = getdefaults('iface')
     summary = "An Openbsd carp interface."
 
-    vars = MyTemplate.vars + \
+    vars = BaseIface.vars + \
            [var('desc', 'description (max 48 bytes)',
                 default=defaults['desc']),
             var('vhid', 'Virtual Hostname ID', default=''),
@@ -27,7 +27,6 @@ class OpenbsdCarpIfaceTemplate(MyTemplate):
         if not 'password' in vars.keys():
             vars['password'] = self.defaults['password']
         vars['desc'] = vars['desc'][:48]
-        self.boolify(vars)
         self.compute_net(vars)
 
 

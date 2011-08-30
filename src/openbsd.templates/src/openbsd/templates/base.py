@@ -1,5 +1,5 @@
 #/usr/bin/env/python
-#
+
 import sys
 import ConfigParser
 import os.path
@@ -25,20 +25,12 @@ def getdefaults(section, cfg=DEFAULT_CONFIG_FILE):
     return settings
 
 
-class MyTemplate(Template):
-    """Base template."""
+class BaseIface(Template):
+    """Base interface template."""
     use_cheetah = True
 
     vars = [var('cidr_ip', 'A CIDR IP address : 192.168.0.1/24', default=''),
             ]
-
-    def boolify(self, vars):
-        """."""
-        unset = ['none', 'false', '0', 'n']
-        for key in vars.keys():
-            if isinstance(vars[key], basestring):
-                if vars[key].lower() in unset:
-                    vars[key] = False
 
     def is_a_network_address(self, address):
         """Check if address is a network address."""
@@ -49,8 +41,8 @@ class MyTemplate(Template):
             return False
 
     def compute_net(self, vars):
-        """."""
-        if not '/' in vars['cidr_ip'] or vars['cidr_ip'].count('/') > 1:
+        """Compute net, netmask and broadcast."""
+        if vars['cidr_ip'].count('/') != 1:
             print '%s is not a CIDR IP address :/' % vars['cidr_ip']
             sys.exit(True)
         else:
@@ -73,9 +65,5 @@ class MyTemplate(Template):
                            % (vars['ip'], net.net(), cidr_netmask)
                     print msg
                     sys.exit(True)
-
-    def pre(self, command, output_dir, vars):
-        """."""
-        self.boolify(vars)
 
 # vim:set et sts=4 ts=4 tw=80:
