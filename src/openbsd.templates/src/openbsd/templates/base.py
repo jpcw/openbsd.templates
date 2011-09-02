@@ -47,6 +47,14 @@ class BaseIface(Template):
             sys.exit(True)
         else:
             vars['ip'], cidr_netmask = vars['cidr_ip'].split('/')
+
+            # check if we can build an ip with input
+            try :
+                net = IP(vars['cidr_ip'], make_net=True)
+            except:
+                print '%s is not a CIDR IP address :/' % vars['cidr_ip']
+                sys.exit(True)
+
             if cidr_netmask != '32':
                 if self.is_a_network_address(vars['cidr_ip']):
                     msg = "Need cofee? you provided "\
@@ -54,7 +62,6 @@ class BaseIface(Template):
                     print msg
                     sys.exit(True)
 
-            net = IP(vars['cidr_ip'], make_net=True)
             vars['netmask'] = net.netmask()
             vars['broadcast'] = str(net.broadcast())
 
